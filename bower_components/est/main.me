@@ -1,0 +1,249 @@
+/*
+    main.me -- Main MakeMe File for the Embedded Security Transport
+
+    This file contains the rules for targets to build and default settings for configuration.
+    The MakeMe utility (https://embedthis.com/me/) may be used to build Est instead of make. 
+    MakeMe provides for configured builds and generates projects files.
+
+    Alternatively, build using the "make" utility in which case this file is not used.
+ */
+
+Me.load({
+    plugins: [ 'configuration', 'installs' ],
+
+    blend: [
+        'osdep',
+        'ssl',
+        'doc/doc.me',
+    ],
+
+    configure: {
+        requires:  [ 'osdep' ],
+        discovers: [ 'ssl' ],
+    },
+
+    settings: {
+        me: '=>0.8.4',
+
+        integrate: true,
+
+        /*
+            Installation prefix set
+         */
+        prefixes: 'install-prefixes',
+
+        est: {
+            /*
+                AES is required for the ciphers:
+                    TLS_RSA_WITH_AES_128_CBC_SHA
+                    TLS_RSA_WITH_AES_256_CBC_SHA
+                    TLS_DHE_RSA_WITH_AES_256_CBC_SHA  
+             */
+            aes: true,
+
+            /* Base64 encoding/decoding */
+            base64: true,
+
+            /* Arbitrary precision math */
+            bignum: true,
+
+            /*
+                ARC4 is required for the ciphers:
+                    TLS_RSA_WITH_RC4_128_MD5
+                    TLS_RSA_WITH_RC4_128_SHA
+            */
+            rc4: true,
+
+            /* 
+                Camellia is required for the ciphers:
+                    TLS_RSA_WITH_CAMELLIA_128_CBC_SHA
+                    TLS_RSA_WITH_CAMELLIA_256_CBC_SHA
+                    TLS_DHE_RSA_WITH_CAMELLIA_256_CBC_SHA
+              */
+            camellia: false,
+
+            /* 
+                Des is required for the ciphers:
+                    TLS_RSA_WITH_3DES_EDE_CBC_SHA
+                    TLS_DHE_RSA_WITH_3DES_EDE_CBC_SHA
+             */
+            des: false,
+
+            /*
+                DHM is required for the ciphers: 
+                    TLS_DHE_RSA_WITH_3DES_EDE_CBC_SHA
+                    TLS_DHE_RSA_WITH_AES_256_CBC_SHA
+             */
+            dhm: true,
+
+            genPrime: true,
+
+            /* Enable the HAVEGE random generator */
+            havege: true,
+
+            /* Enable debug logging */
+            logging: false,
+
+            /* Enable rare) MD2-signed X.509 certs */
+            md2: false,
+
+            /*  Enable (rare) MD4-signed X.509 certs */
+            md4: false,
+
+            /*  TODO */
+            md5: false,
+
+            /* Network I/O interface layer */
+            net: true,
+
+            /* Via Padlock H/W acceleration */
+            padlock: true,
+
+            /* TODO */
+            romTables: true,
+
+            /*
+                Enable RSA ciphers. Required for SSL/TLS and MD5-signed certs.
+             */
+            rsa: true,
+
+            /*
+                Enable SHA1. Required for SSL/TLS and SHA1-signed certs
+             */
+            sha1: true,
+
+            /*
+                Enable SHA2. Required for SHA-224 and SHA-256
+             */
+            sha2: true,
+
+            /*
+                Enable SHA4. Required for SHA-384 and SHA-512
+             */
+            sha4: true,
+
+            sslClient: true,
+            sslServer: true,
+            testCerts: true,
+
+            /*
+                Enable parsing X509 certificates
+             */
+            x509: true,
+
+            /* Enable the XTEA algorithm */
+            xtea: true,
+        }
+    },
+
+    usage: {
+        'est.aes':          'Enable AES cipher (true|false)',
+        'est.base64':       'Enable arbitrary precision math (true|false)',
+        'est.rc4':          'Enable the ARC4 cipher (true|false)',
+        'est.camellia':     'Enable the Camellia cipher (true|false)',
+        'est.des':          'Enable the 3DES cipher (true|false)',
+        'est.dhm':          'Enable the DHM (true|false)',
+        'est.genPrime':     'Enable generation of primes (true|false)',
+        'est.havege':       'Enable HAVEGE random generator (true|false)',
+        'est.logging':      'Enable trace logging (true|false)',
+        'est.md2':          'Enable MD2 (true|false)',
+        'est.md4':          'Enable MD4 (true|false)',
+        'est.md5':          'Enable MD5  (true|false)',
+        'est.net':          'Enable network I/O layer (true|false)',
+        'est.padlock':      'Enable VIA Padlock acceleration (true|false)',
+        'est.romTables':    'Enable ROM tables (true|false)',
+        'est.rsa':          'Enable RSA cipher (true|false)',
+        'est.sha1':         'Enable SHA1 (true|false)',
+        'est.sha2':         'Enable SHA2 (true|false)',
+        'est.sha4':         'Enable SHA4 (true|false)',
+        'est.sslClient':    'Enable SSL/TLS client side (true|false)',
+        'est.sslServer':    'Enable SSL/TLS server side (true|false)',
+        'est.testCerts':    'Enable generation of test certificates (true|false)',
+        'est.x509':         'Enable X509 certificate support (true|false)',
+        'est.xtea':         'Enable XTEA (true|false)',
+    },
+
+    customize: [
+        /* 
+            The optional custom.me file is loaded after main.me is fully processed. It can
+            thus override any setting. Feel free to create and customize. 
+         */
+        'custom.me',
+    ],
+
+    targets: {
+        est: {
+            configurable: true,
+            depends:   [ 'libest' ],
+            conflicts: [ 'matrixssl', 'openssl', 'nanossl' ],
+        },
+
+        libest: {
+            type: 'lib',
+            depends: [ 'osdep' ],
+            headers: [ 'src/*.h' ],
+            sources: [ 'src/*.c' ],
+            '-compiler': [
+                '-Wall',
+                '-Wshorten-64-to-32',
+                '-W3',
+            ],
+            ifdef: [ 'est' ],
+        },
+        projects: {
+            action: `genProjects('-with est')`,
+        },
+
+        mine: {
+            action: `genProjects('-with ejs -with sqlite', 'mine', Config.OS + '-' + Config.CPU)`,
+        }
+    },
+
+    manifest: {
+        packages: {
+            pak: {
+                inherit:    'package-manifest',
+                prefixes:   [ 'src'],
+                formats:    [ 'tar' ],
+                sets:       [ 'pak' ],
+            },
+        },
+        sets: {
+            pak: [
+                {   
+                    from:       'installs/est.me', 
+                    to:         '${src}/dist/est.me',
+
+                },{
+                    from:       [ 
+                                'src/est.h', 'src/bignum.h', 'src/net.h', 'src/dhm.h', 'src/rsa.h', 
+                                'src/md5.h', 'src/sha1.h', 
+                                'src/x509.h', 'src/ssl.h', 'src/aes.h', 'src/arc4.h', 'src/base64.h', 'src/bn_mul.h', 
+                                'src/camellia.h', 'src/certs.h', 'src/debug.h', 'src/des.h', 'src/havege.h', 
+                                'src/md2.h', 'src/md4.h', 'src/padlock.h', 'src/sha2.h', 'src/sha4.h', 'src/timing.h', 
+                                'src/xtea.h'
+                    ],
+                    to:         '${src}/dist/est.h',
+                    append:     true,
+                    filter:     /^#include.*\"/mg,
+                    header:     '/*\n * ${settings.title} Library Header\n */\n\n#include \"me.h\"\n\n#if ME_COM_EST\n\n#include \"osdep.h\"\n',
+                    divider:    true,
+                    footer:     '#endif /* ME_COM_EST */'
+
+                },{
+                    from:       'src/*.c', 
+                    to:         '${src}/dist/estLib.c',
+                    append:     true,
+                    filter:     /^#inc.*est.*$|#inc.*config.h.*$|#inc.*ucp.*.h.*$/mg,
+                    header:     '/*\n * ${settings.title} Library Source\n */\n\n#include \"est.h\"\n\n#if ME_COM_EST',
+                    divider:    true,
+                    footer:     '#endif /* ME_COM_EST */'
+
+                },{
+                    from:       'crt/ca.crt',
+                    to:         '${src}/dist/ca.crt',
+                },
+            ],
+        }
+	},
+})

@@ -1,0 +1,709 @@
+// !$*UTF8*$!
+{
+        archiveVersion = 1;
+        classes = {
+        };
+        objectVersion = 46;
+        objects = {
+
+/* Begin PBXAggregateTarget section */
+		FB1BFCB8FB1C0AF400000006 /* All */ = {
+    			isa = PBXAggregateTarget;
+    			buildConfigurationList = FB1BFCB8FB1C0AF400000005 /* Build configuration list for PBXAggregateTarget "All" */;
+    			buildPhases = (
+    				
+    			);
+    			dependencies = (
+				FB1BFCB8FB1C0AF400000007 /* PBXTargetDependency libest */,
+				FB1BFCB8FB1C0AF400000008 /* PBXTargetDependency All */,
+				FB1BFCB8FB1C0AF400000009 /* PBXTargetDependency Prep */,
+			);
+    			name = All;
+    			productName = All;
+    		};
+		FB1BFCB8FB1C0AF40000000B /* Prep */ = {
+    			isa = PBXAggregateTarget;
+    			buildConfigurationList = FB1BFCB8FB1C0AF40000000A /* Build configuration list for PBXAggregateTarget "Prep" */;
+    			buildPhases = (
+    				FB1BFCB8FB1C0AF40000000C,
+    			);
+    			dependencies = (
+			);
+    			name = Prep;
+    			productName = Prep;
+    		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		FB1BFCB8FB1C0AF40000000D /* aes.c in Sources */ = {isa = PBXBuildFile; fileRef = FB1BFCB8FB1C0AF40000000E /* aes.c */; };
+		FB1BFCB8FB1C0AF40000000F /* arc4.c in Sources */ = {isa = PBXBuildFile; fileRef = FB1BFCB8FB1C0AF400000010 /* arc4.c */; };
+		FB1BFCB8FB1C0AF400000011 /* base64.c in Sources */ = {isa = PBXBuildFile; fileRef = FB1BFCB8FB1C0AF400000012 /* base64.c */; };
+		FB1BFCB8FB1C0AF400000013 /* bignum.c in Sources */ = {isa = PBXBuildFile; fileRef = FB1BFCB8FB1C0AF400000014 /* bignum.c */; };
+		FB1BFCB8FB1C0AF400000015 /* camellia.c in Sources */ = {isa = PBXBuildFile; fileRef = FB1BFCB8FB1C0AF400000016 /* camellia.c */; };
+		FB1BFCB8FB1C0AF400000017 /* certs.c in Sources */ = {isa = PBXBuildFile; fileRef = FB1BFCB8FB1C0AF400000018 /* certs.c */; };
+		FB1BFCB8FB1C0AF400000019 /* debug.c in Sources */ = {isa = PBXBuildFile; fileRef = FB1BFCB8FB1C0AF40000001A /* debug.c */; };
+		FB1BFCB8FB1C0AF40000001B /* des.c in Sources */ = {isa = PBXBuildFile; fileRef = FB1BFCB8FB1C0AF40000001C /* des.c */; };
+		FB1BFCB8FB1C0AF40000001D /* dhm.c in Sources */ = {isa = PBXBuildFile; fileRef = FB1BFCB8FB1C0AF40000001E /* dhm.c */; };
+		FB1BFCB8FB1C0AF40000001F /* havege.c in Sources */ = {isa = PBXBuildFile; fileRef = FB1BFCB8FB1C0AF400000020 /* havege.c */; };
+		FB1BFCB8FB1C0AF400000021 /* md2.c in Sources */ = {isa = PBXBuildFile; fileRef = FB1BFCB8FB1C0AF400000022 /* md2.c */; };
+		FB1BFCB8FB1C0AF400000023 /* md4.c in Sources */ = {isa = PBXBuildFile; fileRef = FB1BFCB8FB1C0AF400000024 /* md4.c */; };
+		FB1BFCB8FB1C0AF400000025 /* md5.c in Sources */ = {isa = PBXBuildFile; fileRef = FB1BFCB8FB1C0AF400000026 /* md5.c */; };
+		FB1BFCB8FB1C0AF400000027 /* net.c in Sources */ = {isa = PBXBuildFile; fileRef = FB1BFCB8FB1C0AF400000028 /* net.c */; };
+		FB1BFCB8FB1C0AF400000029 /* padlock.c in Sources */ = {isa = PBXBuildFile; fileRef = FB1BFCB8FB1C0AF40000002A /* padlock.c */; };
+		FB1BFCB8FB1C0AF40000002B /* rsa.c in Sources */ = {isa = PBXBuildFile; fileRef = FB1BFCB8FB1C0AF40000002C /* rsa.c */; };
+		FB1BFCB8FB1C0AF40000002D /* sha1.c in Sources */ = {isa = PBXBuildFile; fileRef = FB1BFCB8FB1C0AF40000002E /* sha1.c */; };
+		FB1BFCB8FB1C0AF40000002F /* sha2.c in Sources */ = {isa = PBXBuildFile; fileRef = FB1BFCB8FB1C0AF400000030 /* sha2.c */; };
+		FB1BFCB8FB1C0AF400000031 /* sha4.c in Sources */ = {isa = PBXBuildFile; fileRef = FB1BFCB8FB1C0AF400000032 /* sha4.c */; };
+		FB1BFCB8FB1C0AF400000033 /* ssl_cli.c in Sources */ = {isa = PBXBuildFile; fileRef = FB1BFCB8FB1C0AF400000034 /* ssl_cli.c */; };
+		FB1BFCB8FB1C0AF400000035 /* ssl_srv.c in Sources */ = {isa = PBXBuildFile; fileRef = FB1BFCB8FB1C0AF400000036 /* ssl_srv.c */; };
+		FB1BFCB8FB1C0AF400000037 /* ssl_tls.c in Sources */ = {isa = PBXBuildFile; fileRef = FB1BFCB8FB1C0AF400000038 /* ssl_tls.c */; };
+		FB1BFCB8FB1C0AF400000039 /* timing.c in Sources */ = {isa = PBXBuildFile; fileRef = FB1BFCB8FB1C0AF40000003A /* timing.c */; };
+		FB1BFCB8FB1C0AF40000003B /* x509parse.c in Sources */ = {isa = PBXBuildFile; fileRef = FB1BFCB8FB1C0AF40000003C /* x509parse.c */; };
+		FB1BFCB8FB1C0AF40000003D /* xtea.c in Sources */ = {isa = PBXBuildFile; fileRef = FB1BFCB8FB1C0AF40000003E /* xtea.c */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		FB1BFCB8FB1C0AF40000003F /* PBXContainerItemProxy Prep from libest */ = {
+    			isa = PBXContainerItemProxy;
+    			containerPortal = FB1BFCB8FB1C0AF400000001 /* Project object */;
+    			proxyType = 1;
+    			remoteGlobalIDString = FB1BFCB8FB1C0AF40000000B;
+    			remoteInfo = Prep;
+    		};
+		FB1BFCB8FB1C0AF400000040 /* PBXContainerItemProxy Prep from All */ = {
+    			isa = PBXContainerItemProxy;
+    			containerPortal = FB1BFCB8FB1C0AF400000001 /* Project object */;
+    			proxyType = 1;
+    			remoteGlobalIDString = FB1BFCB8FB1C0AF40000000B;
+    			remoteInfo = Prep;
+    		};
+		FB1BFCB8FB1C0AF400000041 /* PBXContainerItemProxy libest from All */ = {
+    			isa = PBXContainerItemProxy;
+    			containerPortal = FB1BFCB8FB1C0AF400000001 /* Project object */;
+    			proxyType = 1;
+    			remoteGlobalIDString = FB1BFCB8FB1C0AF400000042;
+    			remoteInfo = libest;
+    		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		FB1BFCB8FB1C0AF40000000E /* aes.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = aes.c; path = src/aes.c; sourceTree = "<group>"; };
+		FB1BFCB8FB1C0AF400000043 /* est.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = est.h; path = build/macosx-x64-default/inc/est.h; sourceTree = "<group>"; };
+		FB1BFCB8FB1C0AF400000010 /* arc4.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = arc4.c; path = src/arc4.c; sourceTree = "<group>"; };
+		FB1BFCB8FB1C0AF400000012 /* base64.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = base64.c; path = src/base64.c; sourceTree = "<group>"; };
+		FB1BFCB8FB1C0AF400000014 /* bignum.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = bignum.c; path = src/bignum.c; sourceTree = "<group>"; };
+		FB1BFCB8FB1C0AF400000016 /* camellia.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = camellia.c; path = src/camellia.c; sourceTree = "<group>"; };
+		FB1BFCB8FB1C0AF400000018 /* certs.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = certs.c; path = src/certs.c; sourceTree = "<group>"; };
+		FB1BFCB8FB1C0AF40000001A /* debug.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = debug.c; path = src/debug.c; sourceTree = "<group>"; };
+		FB1BFCB8FB1C0AF40000001C /* des.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = des.c; path = src/des.c; sourceTree = "<group>"; };
+		FB1BFCB8FB1C0AF40000001E /* dhm.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = dhm.c; path = src/dhm.c; sourceTree = "<group>"; };
+		FB1BFCB8FB1C0AF400000020 /* havege.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = havege.c; path = src/havege.c; sourceTree = "<group>"; };
+		FB1BFCB8FB1C0AF400000022 /* md2.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = md2.c; path = src/md2.c; sourceTree = "<group>"; };
+		FB1BFCB8FB1C0AF400000024 /* md4.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = md4.c; path = src/md4.c; sourceTree = "<group>"; };
+		FB1BFCB8FB1C0AF400000026 /* md5.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = md5.c; path = src/md5.c; sourceTree = "<group>"; };
+		FB1BFCB8FB1C0AF400000028 /* net.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = net.c; path = src/net.c; sourceTree = "<group>"; };
+		FB1BFCB8FB1C0AF40000002A /* padlock.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = padlock.c; path = src/padlock.c; sourceTree = "<group>"; };
+		FB1BFCB8FB1C0AF40000002C /* rsa.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = rsa.c; path = src/rsa.c; sourceTree = "<group>"; };
+		FB1BFCB8FB1C0AF40000002E /* sha1.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = sha1.c; path = src/sha1.c; sourceTree = "<group>"; };
+		FB1BFCB8FB1C0AF400000030 /* sha2.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = sha2.c; path = src/sha2.c; sourceTree = "<group>"; };
+		FB1BFCB8FB1C0AF400000032 /* sha4.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = sha4.c; path = src/sha4.c; sourceTree = "<group>"; };
+		FB1BFCB8FB1C0AF400000034 /* ssl_cli.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ssl_cli.c; path = src/ssl_cli.c; sourceTree = "<group>"; };
+		FB1BFCB8FB1C0AF400000036 /* ssl_srv.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ssl_srv.c; path = src/ssl_srv.c; sourceTree = "<group>"; };
+		FB1BFCB8FB1C0AF400000038 /* ssl_tls.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ssl_tls.c; path = src/ssl_tls.c; sourceTree = "<group>"; };
+		FB1BFCB8FB1C0AF40000003A /* timing.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = timing.c; path = src/timing.c; sourceTree = "<group>"; };
+		FB1BFCB8FB1C0AF40000003C /* x509parse.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = x509parse.c; path = src/x509parse.c; sourceTree = "<group>"; };
+		FB1BFCB8FB1C0AF40000003E /* xtea.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = xtea.c; path = src/xtea.c; sourceTree = "<group>"; };
+		FB1BFCB8FB1C0AF400000044 /* libest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libest.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FB1BFCB8FB1C0AF400000045 /* Frameworks and Libraries for libest */ = {
+                isa = PBXFrameworksBuildPhase;
+                buildActionMask = 2147483647;
+                files = (
+    				
+                );
+                runOnlyForDeploymentPostprocessing = 0;
+            };
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FB1BFCB8FB1C0AF400000046 /* Top Group */ = {
+                isa = PBXGroup;
+                children = (
+				FB1BFCB8FB1C0AF400000047 /* libest */,
+				FB1BFCB8FB1C0AF400000048 /* Products */,
+			);
+                sourceTree = "<group>";
+            };
+		FB1BFCB8FB1C0AF400000047 /* libest */ = {
+                isa = PBXGroup;
+                children = (
+				FB1BFCB8FB1C0AF400000043 /* est.h */,
+				FB1BFCB8FB1C0AF40000000E /* aes.c */,
+				FB1BFCB8FB1C0AF400000010 /* arc4.c */,
+				FB1BFCB8FB1C0AF400000012 /* base64.c */,
+				FB1BFCB8FB1C0AF400000014 /* bignum.c */,
+				FB1BFCB8FB1C0AF400000016 /* camellia.c */,
+				FB1BFCB8FB1C0AF400000018 /* certs.c */,
+				FB1BFCB8FB1C0AF40000001A /* debug.c */,
+				FB1BFCB8FB1C0AF40000001C /* des.c */,
+				FB1BFCB8FB1C0AF40000001E /* dhm.c */,
+				FB1BFCB8FB1C0AF400000020 /* havege.c */,
+				FB1BFCB8FB1C0AF400000022 /* md2.c */,
+				FB1BFCB8FB1C0AF400000024 /* md4.c */,
+				FB1BFCB8FB1C0AF400000026 /* md5.c */,
+				FB1BFCB8FB1C0AF400000028 /* net.c */,
+				FB1BFCB8FB1C0AF40000002A /* padlock.c */,
+				FB1BFCB8FB1C0AF40000002C /* rsa.c */,
+				FB1BFCB8FB1C0AF40000002E /* sha1.c */,
+				FB1BFCB8FB1C0AF400000030 /* sha2.c */,
+				FB1BFCB8FB1C0AF400000032 /* sha4.c */,
+				FB1BFCB8FB1C0AF400000034 /* ssl_cli.c */,
+				FB1BFCB8FB1C0AF400000036 /* ssl_srv.c */,
+				FB1BFCB8FB1C0AF400000038 /* ssl_tls.c */,
+				FB1BFCB8FB1C0AF40000003A /* timing.c */,
+				FB1BFCB8FB1C0AF40000003C /* x509parse.c */,
+				FB1BFCB8FB1C0AF40000003E /* xtea.c */,
+			);
+                name = "libest";
+                path = ..;
+                sourceTree = SOURCE_ROOT;
+            };
+		FB1BFCB8FB1C0AF400000048 /* Products */ = {
+                isa = PBXGroup;
+                children = (
+				FB1BFCB8FB1C0AF400000044 /* libest */,
+			);
+                name = "Products";
+                path = ..;
+                sourceTree = SOURCE_ROOT;
+            };
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FB1BFCB8FB1C0AF400000042 /* libest */ = {
+    			isa = PBXNativeTarget;
+    			buildConfigurationList = FB1BFCB8FB1C0AF40000004A /* Build configuration list for PBXNativeTarget "libest" */;
+    			buildPhases = (
+    				FB1BFCB8FB1C0AF400000049 /* Sources */,
+    				FB1BFCB8FB1C0AF400000045 /* Frameworks */,
+    			);
+    			buildRules = (
+    			);
+    			dependencies = (
+    				FB1BFCB8FB1C0AF40000004B /* Prep */,				
+    			);
+    			name = libest;
+    			productName = est;
+    			productReference = FB1BFCB8FB1C0AF400000044 /* libest */;
+    			productType = "com.apple.product-type.library.dynamic";
+    		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		FB1BFCB8FB1C0AF40000000C /* ShellScript for Prep */ = {
+    			isa = PBXShellScriptBuildPhase;
+    			buildActionMask = 2147483647;
+    			files = (
+    			);
+    			inputPaths = (
+    
+    			);
+    			outputPaths = (
+    
+    			);
+    			runOnlyForDeploymentPostprocessing = 0;
+    			shellPath = /bin/bash;
+    			shellScript = "PATH=$PATH:/usr/local/bin
+[ ! -x ${INC_DIR} ] && mkdir -p ${INC_DIR} ${OBJ_DIR} ${LIB_DIR} ${BIN_DIR}
+[ ! -f ${INC_DIR}/me.h -a -f est-macosx-default-me.h ] && cp est-macosx-default-me.h ${INC_DIR}/me.h
+if [ -f est-macosx-default-me.h ] ; then
+if ! diff ${INC_DIR}/me.h est-macosx-default-me.h >/dev/null 2>&1 ; then
+cp est-macosx-default-me.h ${INC_DIR}/me.h
+fi
+fi
+if [ ../src/aes.h -nt ${OUT_DIR}/inc/aes.h ] ; then
+cp ../src/aes.h ${OUT_DIR}/inc/aes.h
+fi
+if [ ../src/arc4.h -nt ${OUT_DIR}/inc/arc4.h ] ; then
+cp ../src/arc4.h ${OUT_DIR}/inc/arc4.h
+fi
+if [ ../src/base64.h -nt ${OUT_DIR}/inc/base64.h ] ; then
+cp ../src/base64.h ${OUT_DIR}/inc/base64.h
+fi
+if [ ../src/bignum.h -nt ${OUT_DIR}/inc/bignum.h ] ; then
+cp ../src/bignum.h ${OUT_DIR}/inc/bignum.h
+fi
+if [ ../src/bn_mul.h -nt ${OUT_DIR}/inc/bn_mul.h ] ; then
+cp ../src/bn_mul.h ${OUT_DIR}/inc/bn_mul.h
+fi
+if [ ../src/camellia.h -nt ${OUT_DIR}/inc/camellia.h ] ; then
+cp ../src/camellia.h ${OUT_DIR}/inc/camellia.h
+fi
+if [ ../src/certs.h -nt ${OUT_DIR}/inc/certs.h ] ; then
+cp ../src/certs.h ${OUT_DIR}/inc/certs.h
+fi
+if [ ../src/debug.h -nt ${OUT_DIR}/inc/debug.h ] ; then
+cp ../src/debug.h ${OUT_DIR}/inc/debug.h
+fi
+if [ ../src/des.h -nt ${OUT_DIR}/inc/des.h ] ; then
+cp ../src/des.h ${OUT_DIR}/inc/des.h
+fi
+if [ ../src/dhm.h -nt ${OUT_DIR}/inc/dhm.h ] ; then
+cp ../src/dhm.h ${OUT_DIR}/inc/dhm.h
+fi
+if [ ../src/est.h -nt ${OUT_DIR}/inc/est.h ] ; then
+cp ../src/est.h ${OUT_DIR}/inc/est.h
+fi
+if [ ../src/havege.h -nt ${OUT_DIR}/inc/havege.h ] ; then
+cp ../src/havege.h ${OUT_DIR}/inc/havege.h
+fi
+if [ ../src/md2.h -nt ${OUT_DIR}/inc/md2.h ] ; then
+cp ../src/md2.h ${OUT_DIR}/inc/md2.h
+fi
+if [ ../src/md4.h -nt ${OUT_DIR}/inc/md4.h ] ; then
+cp ../src/md4.h ${OUT_DIR}/inc/md4.h
+fi
+if [ ../src/md5.h -nt ${OUT_DIR}/inc/md5.h ] ; then
+cp ../src/md5.h ${OUT_DIR}/inc/md5.h
+fi
+if [ ../src/net.h -nt ${OUT_DIR}/inc/net.h ] ; then
+cp ../src/net.h ${OUT_DIR}/inc/net.h
+fi
+if [ ../src/openssl.h -nt ${OUT_DIR}/inc/openssl.h ] ; then
+cp ../src/openssl.h ${OUT_DIR}/inc/openssl.h
+fi
+if [ ../src/osdep/osdep.h -nt ${OUT_DIR}/inc/osdep.h ] ; then
+cp ../src/osdep/osdep.h ${OUT_DIR}/inc/osdep.h
+fi
+if [ ../src/padlock.h -nt ${OUT_DIR}/inc/padlock.h ] ; then
+cp ../src/padlock.h ${OUT_DIR}/inc/padlock.h
+fi
+if [ ../src/rsa.h -nt ${OUT_DIR}/inc/rsa.h ] ; then
+cp ../src/rsa.h ${OUT_DIR}/inc/rsa.h
+fi
+if [ ../src/sha1.h -nt ${OUT_DIR}/inc/sha1.h ] ; then
+cp ../src/sha1.h ${OUT_DIR}/inc/sha1.h
+fi
+if [ ../src/sha2.h -nt ${OUT_DIR}/inc/sha2.h ] ; then
+cp ../src/sha2.h ${OUT_DIR}/inc/sha2.h
+fi
+if [ ../src/sha4.h -nt ${OUT_DIR}/inc/sha4.h ] ; then
+cp ../src/sha4.h ${OUT_DIR}/inc/sha4.h
+fi
+if [ ../src/ssl.h -nt ${OUT_DIR}/inc/ssl.h ] ; then
+cp ../src/ssl.h ${OUT_DIR}/inc/ssl.h
+fi
+if [ ../src/timing.h -nt ${OUT_DIR}/inc/timing.h ] ; then
+cp ../src/timing.h ${OUT_DIR}/inc/timing.h
+fi
+if [ ../src/x509.h -nt ${OUT_DIR}/inc/x509.h ] ; then
+cp ../src/x509.h ${OUT_DIR}/inc/x509.h
+fi
+if [ ../src/xtea.h -nt ${OUT_DIR}/inc/xtea.h ] ; then
+cp ../src/xtea.h ${OUT_DIR}/inc/xtea.h
+fi
+if [ ../src/aes.h -nt ${OUT_DIR}/inc/aes.h ] ; then
+cp ../src/aes.h ${OUT_DIR}/inc/aes.h
+fi
+if [ ../src/arc4.h -nt ${OUT_DIR}/inc/arc4.h ] ; then
+cp ../src/arc4.h ${OUT_DIR}/inc/arc4.h
+fi
+if [ ../src/base64.h -nt ${OUT_DIR}/inc/base64.h ] ; then
+cp ../src/base64.h ${OUT_DIR}/inc/base64.h
+fi
+if [ ../src/bignum.h -nt ${OUT_DIR}/inc/bignum.h ] ; then
+cp ../src/bignum.h ${OUT_DIR}/inc/bignum.h
+fi
+if [ ../src/bn_mul.h -nt ${OUT_DIR}/inc/bn_mul.h ] ; then
+cp ../src/bn_mul.h ${OUT_DIR}/inc/bn_mul.h
+fi
+if [ ../src/camellia.h -nt ${OUT_DIR}/inc/camellia.h ] ; then
+cp ../src/camellia.h ${OUT_DIR}/inc/camellia.h
+fi
+if [ ../src/certs.h -nt ${OUT_DIR}/inc/certs.h ] ; then
+cp ../src/certs.h ${OUT_DIR}/inc/certs.h
+fi
+if [ ../src/debug.h -nt ${OUT_DIR}/inc/debug.h ] ; then
+cp ../src/debug.h ${OUT_DIR}/inc/debug.h
+fi
+if [ ../src/des.h -nt ${OUT_DIR}/inc/des.h ] ; then
+cp ../src/des.h ${OUT_DIR}/inc/des.h
+fi
+if [ ../src/dhm.h -nt ${OUT_DIR}/inc/dhm.h ] ; then
+cp ../src/dhm.h ${OUT_DIR}/inc/dhm.h
+fi
+if [ ../src/est.h -nt ${OUT_DIR}/inc/est.h ] ; then
+cp ../src/est.h ${OUT_DIR}/inc/est.h
+fi
+if [ ../src/havege.h -nt ${OUT_DIR}/inc/havege.h ] ; then
+cp ../src/havege.h ${OUT_DIR}/inc/havege.h
+fi
+if [ ../src/md2.h -nt ${OUT_DIR}/inc/md2.h ] ; then
+cp ../src/md2.h ${OUT_DIR}/inc/md2.h
+fi
+if [ ../src/md4.h -nt ${OUT_DIR}/inc/md4.h ] ; then
+cp ../src/md4.h ${OUT_DIR}/inc/md4.h
+fi
+if [ ../src/md5.h -nt ${OUT_DIR}/inc/md5.h ] ; then
+cp ../src/md5.h ${OUT_DIR}/inc/md5.h
+fi
+if [ ../src/net.h -nt ${OUT_DIR}/inc/net.h ] ; then
+cp ../src/net.h ${OUT_DIR}/inc/net.h
+fi
+if [ ../src/openssl.h -nt ${OUT_DIR}/inc/openssl.h ] ; then
+cp ../src/openssl.h ${OUT_DIR}/inc/openssl.h
+fi
+if [ ../src/padlock.h -nt ${OUT_DIR}/inc/padlock.h ] ; then
+cp ../src/padlock.h ${OUT_DIR}/inc/padlock.h
+fi
+if [ ../src/rsa.h -nt ${OUT_DIR}/inc/rsa.h ] ; then
+cp ../src/rsa.h ${OUT_DIR}/inc/rsa.h
+fi
+if [ ../src/sha1.h -nt ${OUT_DIR}/inc/sha1.h ] ; then
+cp ../src/sha1.h ${OUT_DIR}/inc/sha1.h
+fi
+if [ ../src/sha2.h -nt ${OUT_DIR}/inc/sha2.h ] ; then
+cp ../src/sha2.h ${OUT_DIR}/inc/sha2.h
+fi
+if [ ../src/sha4.h -nt ${OUT_DIR}/inc/sha4.h ] ; then
+cp ../src/sha4.h ${OUT_DIR}/inc/sha4.h
+fi
+if [ ../src/ssl.h -nt ${OUT_DIR}/inc/ssl.h ] ; then
+cp ../src/ssl.h ${OUT_DIR}/inc/ssl.h
+fi
+if [ ../src/timing.h -nt ${OUT_DIR}/inc/timing.h ] ; then
+cp ../src/timing.h ${OUT_DIR}/inc/timing.h
+fi
+if [ ../src/x509.h -nt ${OUT_DIR}/inc/x509.h ] ; then
+cp ../src/x509.h ${OUT_DIR}/inc/x509.h
+fi
+if [ ../src/xtea.h -nt ${OUT_DIR}/inc/xtea.h ] ; then
+cp ../src/xtea.h ${OUT_DIR}/inc/xtea.h
+fi";
+    		};
+/* End PBXShellScriptBuildPhase section */
+
+    /* Begin PBXProject section */
+    		FB1BFCB8FB1C0AF400000001 /* Project object */ = {
+    			isa = PBXProject;
+    			attributes = {
+    				LastUpgradeCheck = 0430;
+    				ORGANIZATIONNAME = "embedthis";
+    			};
+    			buildConfigurationList = FB1BFCB8FB1C0AF400000002 /* Build configuration list for PBXProject "est" */;
+    			compatibilityVersion = "Xcode 3.2";
+    			developmentRegion = English;
+    			hasScannedForEncodings = 0;
+    			knownRegions = (
+    				en,
+    			);
+    			mainGroup = FB1BFCB8FB1C0AF400000046;
+    			productRefGroup = FB1BFCB8FB1C0AF400000048 /* Products */;
+    			projectDirPath = "";
+    			projectRoot = "";
+    			targets = (
+				FB1BFCB8FB1C0AF400000006 /* All */,
+				FB1BFCB8FB1C0AF40000000B /* Prep */,
+				FB1BFCB8FB1C0AF400000042 /* libest */,
+			);
+    		};
+    /* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FB1BFCB8FB1C0AF400000049 /* libest Sources */ = {
+    			isa = PBXSourcesBuildPhase;
+    			buildActionMask = 2147483647;
+    			files = (
+    				FB1BFCB8FB1C0AF40000000D /* aes.c in Sources */,
+				FB1BFCB8FB1C0AF40000000F /* arc4.c in Sources */,
+				FB1BFCB8FB1C0AF400000011 /* base64.c in Sources */,
+				FB1BFCB8FB1C0AF400000013 /* bignum.c in Sources */,
+				FB1BFCB8FB1C0AF400000015 /* camellia.c in Sources */,
+				FB1BFCB8FB1C0AF400000017 /* certs.c in Sources */,
+				FB1BFCB8FB1C0AF400000019 /* debug.c in Sources */,
+				FB1BFCB8FB1C0AF40000001B /* des.c in Sources */,
+				FB1BFCB8FB1C0AF40000001D /* dhm.c in Sources */,
+				FB1BFCB8FB1C0AF40000001F /* havege.c in Sources */,
+				FB1BFCB8FB1C0AF400000021 /* md2.c in Sources */,
+				FB1BFCB8FB1C0AF400000023 /* md4.c in Sources */,
+				FB1BFCB8FB1C0AF400000025 /* md5.c in Sources */,
+				FB1BFCB8FB1C0AF400000027 /* net.c in Sources */,
+				FB1BFCB8FB1C0AF400000029 /* padlock.c in Sources */,
+				FB1BFCB8FB1C0AF40000002B /* rsa.c in Sources */,
+				FB1BFCB8FB1C0AF40000002D /* sha1.c in Sources */,
+				FB1BFCB8FB1C0AF40000002F /* sha2.c in Sources */,
+				FB1BFCB8FB1C0AF400000031 /* sha4.c in Sources */,
+				FB1BFCB8FB1C0AF400000033 /* ssl_cli.c in Sources */,
+				FB1BFCB8FB1C0AF400000035 /* ssl_srv.c in Sources */,
+				FB1BFCB8FB1C0AF400000037 /* ssl_tls.c in Sources */,
+				FB1BFCB8FB1C0AF400000039 /* timing.c in Sources */,
+				FB1BFCB8FB1C0AF40000003B /* x509parse.c in Sources */,
+				FB1BFCB8FB1C0AF40000003D /* xtea.c in Sources */,
+    			);
+    			runOnlyForDeploymentPostprocessing = 0;
+    		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		FB1BFCB8FB1C0AF40000004B /* PBXTargetDependency libest depends on Prep */ = {
+    			isa = PBXTargetDependency;
+    			target = FB1BFCB8FB1C0AF40000000B /* Prep */;
+    			targetProxy = FB1BFCB8FB1C0AF40000003F /* PBXContainerItemProxy */;
+    		};
+		FB1BFCB8FB1C0AF400000009 /* PBXTargetDependency All depends on Prep */ = {
+    			isa = PBXTargetDependency;
+    			target = FB1BFCB8FB1C0AF40000000B /* Prep */;
+    			targetProxy = FB1BFCB8FB1C0AF400000040 /* PBXContainerItemProxy */;
+    		};
+		FB1BFCB8FB1C0AF400000007 /* PBXTargetDependency All depends on libest */ = {
+    			isa = PBXTargetDependency;
+    			target = FB1BFCB8FB1C0AF400000042 /* libest */;
+    			targetProxy = FB1BFCB8FB1C0AF400000041 /* PBXContainerItemProxy */;
+    		};
+/* End PBXTargetDependency section */
+
+    /* Begin XCBuildConfiguration section */
+    		FB1BFCB8FB1C0AF400000003 /* Debug */ = {
+    			isa = XCBuildConfiguration;
+    			buildSettings = {
+    
+                    /* Common Settings */
+    				ALWAYS_SEARCH_USER_PATHS = NO;
+                    ONLY_ACTIVE_ARCH = YES;
+                    CURRENT_PROJECT_VERSION = 0.6;
+                    DYLIB_COMPATIBILITY_VERSION = "$(CURRENT_PROJECT_VERSION)";
+                    DYLIB_CURRENT_VERSION = "$(CURRENT_PROJECT_VERSION)";
+    				GCC_C_LANGUAGE_STANDARD = gnu99;
+    				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+    				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+                    LD_DYLIB_INSTALL_NAME = "@rpath/$(EXECUTABLE_PATH)";
+    				MACOSX_DEPLOYMENT_TARGET = 10.7;
+    				SDKROOT = macosx;
+
+                    OUT_DIR = "../build/macosx-x64-default";
+                    BIN_DIR = "../build/macosx-x64-default/bin";
+                    LIB_DIR = "../src";
+                    INC_DIR = "../build/macosx-x64-default/inc";
+                    OBJ_DIR = "../build/macosx-x64-default/obj";
+                    SRC_DIR = "../src";
+
+                    CONFIGURATION_TEMP_DIR = "$(OBJ_DIR)/est-xcode/$(CONFIGURATION)";
+                    CONFIGURATION_BUILD_DIR = "$(BIN_DIR)";
+                    INSTALL_PATH = "/usr/lib/est";
+                    DSTROOT = "/tmp/est.dst";
+                    OBJROOT = "$(OBJ_DIR)";
+                    SYMROOT = "$(BIN_DIR)";
+    				GCC_WARN_64_TO_32_ME_CONVERSION = YES;
+				GCC_WARN_64_TO_32_ME_CONVERSION = YES;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				GCC_WARN_UNUSED_FUNCTION = NO;
+				GCC_WARN_UNUSED_LABEL = NO;
+				GCC_WARN_64_TO_32_ME_CONVERSION = YES;
+				GCC_WARN_64_TO_32_ME_CONVERSION = YES;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				GCC_WARN_UNUSED_FUNCTION = NO;
+				GCC_WARN_UNUSED_LABEL = NO;
+
+                    /* Debug Settings */
+    				COPY_PHASE_STRIP = NO;
+    				GCC_OPTIMIZATION_LEVEL = 0;
+    				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+    				HEADER_SEARCH_PATHS = (
+					"../build/macosx-x64-default/inc",
+					"$(inherited)"
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"ME_DEBUG",
+					"$(inherited)"
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"../build/macosx-x64-default/bin",
+					"$(inherited)"
+				);
+				OTHER_LDFLAGS = (
+					"-Wl,-rpath,@executable_path/",
+					"-Wl,-rpath,@loader_path/",
+					"-ldl",
+					"-lpthread",
+					"-lm",
+					"$(inherited)"
+				);
+
+    			};
+    			name = Debug;
+    		};
+    		FB1BFCB8FB1C0AF400000004 /* Release */ = {
+    			isa = XCBuildConfiguration;
+    			buildSettings = {
+    
+                    /* Common Settings */
+    				ALWAYS_SEARCH_USER_PATHS = NO;
+                    ONLY_ACTIVE_ARCH = YES;
+                    CURRENT_PROJECT_VERSION = 0.6;
+                    DYLIB_COMPATIBILITY_VERSION = "$(CURRENT_PROJECT_VERSION)";
+                    DYLIB_CURRENT_VERSION = "$(CURRENT_PROJECT_VERSION)";
+    				GCC_C_LANGUAGE_STANDARD = gnu99;
+    				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+    				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+                    LD_DYLIB_INSTALL_NAME = "@rpath/$(EXECUTABLE_PATH)";
+    				MACOSX_DEPLOYMENT_TARGET = 10.7;
+    				SDKROOT = macosx;
+
+                    OUT_DIR = "../build/macosx-x64-default";
+                    BIN_DIR = "../build/macosx-x64-default/bin";
+                    LIB_DIR = "../src";
+                    INC_DIR = "../build/macosx-x64-default/inc";
+                    OBJ_DIR = "../build/macosx-x64-default/obj";
+                    SRC_DIR = "../src";
+
+                    CONFIGURATION_TEMP_DIR = "$(OBJ_DIR)/est-xcode/$(CONFIGURATION)";
+                    CONFIGURATION_BUILD_DIR = "$(BIN_DIR)";
+                    INSTALL_PATH = "/usr/lib/est";
+                    DSTROOT = "/tmp/est.dst";
+                    OBJROOT = "$(OBJ_DIR)";
+                    SYMROOT = "$(BIN_DIR)";
+    				GCC_WARN_64_TO_32_ME_CONVERSION = YES;
+				GCC_WARN_64_TO_32_ME_CONVERSION = YES;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				GCC_WARN_UNUSED_FUNCTION = NO;
+				GCC_WARN_UNUSED_LABEL = NO;
+				GCC_WARN_64_TO_32_ME_CONVERSION = YES;
+				GCC_WARN_64_TO_32_ME_CONVERSION = YES;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				GCC_WARN_UNUSED_FUNCTION = NO;
+				GCC_WARN_UNUSED_LABEL = NO;
+
+                    /* Release Settings */
+    				COPY_PHASE_STRIP = YES;
+    				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+    				GCC_OPTIMIZATION_LEVEL = s;
+                    GCC_WARN_UNINITIALIZED_AUTOS = NO;
+    				HEADER_SEARCH_PATHS = (
+					"../build/macosx-x64-default/inc",
+					"$(inherited)"
+				);
+
+				LIBRARY_SEARCH_PATHS = (
+					"../build/macosx-x64-default/bin",
+					"$(inherited)"
+				);
+				OTHER_LDFLAGS = (
+					"-Wl,-rpath,@executable_path/",
+					"-Wl,-rpath,@loader_path/",
+					"-ldl",
+					"-lpthread",
+					"-lm",
+					"$(inherited)"
+				);
+
+    			};
+    			name = Release;
+    		};
+		FB1BFCB8FB1C0AF40000004C /* Debug */ = {
+    			isa = XCBuildConfiguration;
+    			buildSettings = {
+    				PRODUCT_NAME = libest;
+    
+    				GCC_PREPROCESSOR_DEFINITIONS = (
+					"ME_DEBUG",
+					"$(inherited)"
+				);
+    			};
+    			name = Debug;
+    		};
+    		FB1BFCB8FB1C0AF40000004D /* Release */ = {
+    			isa = XCBuildConfiguration;
+    			buildSettings = {
+    				PRODUCT_NAME = libest;
+    
+    
+    			};
+    			name = Release;
+    		};
+		FB1BFCB8FB1C0AF40000004E /* Debug */ = {
+    			isa = XCBuildConfiguration;
+    			buildSettings = {
+    				PRODUCT_NAME = All;
+    
+    				GCC_PREPROCESSOR_DEFINITIONS = (
+					"ME_DEBUG",
+					"$(inherited)"
+				);
+    			};
+    			name = Debug;
+    		};
+    		FB1BFCB8FB1C0AF40000004F /* Release */ = {
+    			isa = XCBuildConfiguration;
+    			buildSettings = {
+    				PRODUCT_NAME = All;
+    
+    
+    			};
+    			name = Release;
+    		};
+		FB1BFCB8FB1C0AF400000050 /* Debug */ = {
+    			isa = XCBuildConfiguration;
+    			buildSettings = {
+    				PRODUCT_NAME = Prep;
+    
+    				GCC_PREPROCESSOR_DEFINITIONS = (
+					"ME_DEBUG",
+					"$(inherited)"
+				);
+    			};
+    			name = Debug;
+    		};
+    		FB1BFCB8FB1C0AF400000051 /* Release */ = {
+    			isa = XCBuildConfiguration;
+    			buildSettings = {
+    				PRODUCT_NAME = Prep;
+    
+    
+    			};
+    			name = Release;
+    		};
+/* End XCBuildConfiguration section */
+
+    /* Begin XCConfigurationList section */
+    		FB1BFCB8FB1C0AF400000002 /* Build configuration list for PBXProject "est" */ = {
+    			isa = XCConfigurationList;
+    			buildConfigurations = (
+    				FB1BFCB8FB1C0AF400000003 /* Debug */,
+    				FB1BFCB8FB1C0AF400000004 /* Release */,
+    			);
+    			defaultConfigurationIsVisible = 0;
+    			defaultConfigurationName = Release;
+    		};
+		FB1BFCB8FB1C0AF40000004A /* Build configuration list for PBXNativeTarget "libest" */ = {
+    			isa = XCConfigurationList;
+    			buildConfigurations = (
+    				FB1BFCB8FB1C0AF40000004C /* Debug */,
+    				FB1BFCB8FB1C0AF40000004D /* Release */,
+    			);
+    			defaultConfigurationIsVisible = 0;
+    			defaultConfigurationName = Release;
+    		};
+		FB1BFCB8FB1C0AF400000005 /* Build configuration list for PBXNativeTarget "All" */ = {
+    			isa = XCConfigurationList;
+    			buildConfigurations = (
+    				FB1BFCB8FB1C0AF40000004E /* Debug */,
+    				FB1BFCB8FB1C0AF40000004F /* Release */,
+    			);
+    			defaultConfigurationIsVisible = 0;
+    			defaultConfigurationName = Release;
+    		};
+		FB1BFCB8FB1C0AF40000000A /* Build configuration list for PBXNativeTarget "Prep" */ = {
+    			isa = XCConfigurationList;
+    			buildConfigurations = (
+    				FB1BFCB8FB1C0AF400000050 /* Debug */,
+    				FB1BFCB8FB1C0AF400000051 /* Release */,
+    			);
+    			defaultConfigurationIsVisible = 0;
+    			defaultConfigurationName = Release;
+    		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FB1BFCB8FB1C0AF400000001 /* Project object */;
+}

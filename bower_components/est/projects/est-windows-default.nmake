@@ -1,0 +1,791 @@
+#
+#   est-windows-default.nmake -- Makefile to build Embethis EST for windows
+#
+
+NAME                  = est
+VERSION               = 0.6.3
+
+OS                    = windows
+PA                    = $(PROCESSOR_ARCHITECTURE)
+!IF "$(PROFILE)" == ""
+PROFILE               = default
+!ENDIF
+
+
+!IF "$(PA)" == "AMD64"
+ARCH                  = x64
+ENTRY                 = _DllMainCRTStartup
+!ELSE
+ARCH                  = x86
+ENTRY                 = _DllMainCRTStartup@12
+!ENDIF
+
+!IF "$(CONFIG)" == ""
+CONFIG                = $(OS)-$(ARCH)-$(PROFILE)
+!ENDIF
+
+!IF "$(BUILD)" == ""
+BUILD                 = build\$(CONFIG)
+!ENDIF
+
+LBIN                  = $(BUILD)\bin
+
+!IF "$(ME_COM_COMPILER)" == ""
+ME_COM_COMPILER       = 1
+!ENDIF
+!IF "$(ME_COM_EST)" == ""
+ME_COM_EST            = 1
+!ENDIF
+!IF "$(ME_COM_LIB)" == ""
+ME_COM_LIB            = 1
+!ENDIF
+!IF "$(ME_COM_LINK)" == ""
+ME_COM_LINK           = 1
+!ENDIF
+!IF "$(ME_COM_OPENSSL)" == ""
+ME_COM_OPENSSL        = 0
+!ENDIF
+!IF "$(ME_COM_OSDEP)" == ""
+ME_COM_OSDEP          = 1
+!ENDIF
+!IF "$(ME_COM_RC)" == ""
+ME_COM_RC             = 1
+!ENDIF
+!IF "$(ME_COM_SSL)" == ""
+ME_COM_SSL            = 1
+!ENDIF
+!IF "$(ME_COM_VXWORKS)" == ""
+ME_COM_VXWORKS        = 0
+!ENDIF
+!IF "$(ME_COM_WINSDK)" == ""
+ME_COM_WINSDK         = 1
+!ENDIF
+
+!IF "$(ME_COM_OPENSSL)" == ""
+ME_COM_OPENSSL_PATH   = "/usr"
+!ENDIF
+
+!IF "$(ME_COM_COMPILER)" == ""
+ME_COM_COMPILER       = 1
+!ENDIF
+
+!IF "$(ME_COM_COMPILER)" == ""
+ME_COM_COMPILER       = 1
+!ENDIF
+
+!IF "$(ME_COM_SSL)" == ""
+ME_COM_SSL            = 1
+!ENDIF
+
+!IF "$(ME_COM_WINSDK)" == ""
+ME_COM_WINSDK         = 1
+!ENDIF
+
+
+CC                    = cl
+LD                    = link
+RC                    = rc
+CFLAGS                = -nologo -GR- -W3 -Zi -Od -MDd
+DFLAGS                = -D_REENTRANT -D_MT -DME_COM_COMPILER=$(ME_COM_COMPILER) -DME_COM_EST=$(ME_COM_EST) -DME_COM_LIB=$(ME_COM_LIB) -DME_COM_LINK=$(ME_COM_LINK) -DME_COM_OPENSSL=$(ME_COM_OPENSSL) -DME_COM_OSDEP=$(ME_COM_OSDEP) -DME_COM_RC=$(ME_COM_RC) -DME_COM_SSL=$(ME_COM_SSL) -DME_COM_VXWORKS=$(ME_COM_VXWORKS) -DME_COM_WINSDK=$(ME_COM_WINSDK) 
+IFLAGS                = -Ibuild\$(CONFIG)\inc
+LDFLAGS               = -nologo -nodefaultlib -incremental:no -debug -machine:$(ARCH)
+LIBPATHS              = "-libpath:$(BUILD)\bin"
+LIBS                  = ws2_32.lib advapi32.lib user32.lib kernel32.lib oldnames.lib msvcrt.lib shell32.lib
+
+ME_ROOT_PREFIX        = C:
+ME_BASE_PREFIX        = $(ME_ROOT_PREFIX)\Program Files
+ME_APP_PREFIX         = $(ME_BASE_PREFIX)\Embethis EST
+ME_VAPP_PREFIX        = $(ME_APP_PREFIX)
+ME_DATA_PREFIX        = $(ME_VAPP_PREFIX)
+ME_STATE_PREFIX       = $(ME_VAPP_PREFIX)
+ME_BIN_PREFIX         = $(ME_VAPP_PREFIX)\bin
+ME_INC_PREFIX         = $(ME_VAPP_PREFIX)\inc
+ME_LIB_PREFIX         = $(ME_VAPP_PREFIX)\lib
+ME_MAN_PREFIX         = $(ME_VAPP_PREFIX)\man
+ME_ETC_PREFIX         = $(ME_VAPP_PREFIX)
+ME_WEB_PREFIX         = $(ME_VAPP_PREFIX)\web
+ME_LOG_PREFIX         = $(ME_VAPP_PREFIX)\log
+ME_SPOOL_PREFIX       = $(ME_VAPP_PREFIX)\tmp
+ME_CACHE_PREFIX       = $(ME_VAPP_PREFIX)\cache
+ME_SRC_PREFIX         = $(ME_VAPP_PREFIX)\src
+
+
+!IF "$(ME_COM_EST)" == "1"
+TARGETS               = $(TARGETS) build\$(CONFIG)\bin\libest.dll
+!ENDIF
+
+!IFNDEF SHOW
+.SILENT:
+!ENDIF
+
+all build compile: prep $(TARGETS)
+
+.PHONY: prep
+
+prep:
+!IF "$(VSINSTALLDIR)" == ""
+	echo "Visual Studio vars not set. Run vcvars.bat."
+	exit 255
+!ENDIF
+!IF "$(ME_APP_PREFIX)" == ""
+	echo "ME_APP_PREFIX not set."
+	exit 255
+!ENDIF
+	@if not exist $(BUILD)\bin md $(BUILD)\bin
+	@if not exist $(BUILD)\inc md $(BUILD)\inc
+	@if not exist $(BUILD)\obj md $(BUILD)\obj
+	@if not exist $(BUILD)\inc\me.h copy projects\est-windows-default-me.h $(BUILD)\inc\me.h
+
+!IF "$(SHOW)" != ""
+	@echo ..... [Info] Use "make SHOW=1" to trace executed commands and errors.
+LOG =
+!ELSE
+LOG = >nul
+!ENDIF
+
+clean:
+	if exist "build\$(CONFIG)\obj\aes.obj" del /Q "build\$(CONFIG)\obj\aes.obj"
+	if exist "build\$(CONFIG)\obj\arc4.obj" del /Q "build\$(CONFIG)\obj\arc4.obj"
+	if exist "build\$(CONFIG)\obj\base64.obj" del /Q "build\$(CONFIG)\obj\base64.obj"
+	if exist "build\$(CONFIG)\obj\bignum.obj" del /Q "build\$(CONFIG)\obj\bignum.obj"
+	if exist "build\$(CONFIG)\obj\camellia.obj" del /Q "build\$(CONFIG)\obj\camellia.obj"
+	if exist "build\$(CONFIG)\obj\certs.obj" del /Q "build\$(CONFIG)\obj\certs.obj"
+	if exist "build\$(CONFIG)\obj\debug.obj" del /Q "build\$(CONFIG)\obj\debug.obj"
+	if exist "build\$(CONFIG)\obj\des.obj" del /Q "build\$(CONFIG)\obj\des.obj"
+	if exist "build\$(CONFIG)\obj\dhm.obj" del /Q "build\$(CONFIG)\obj\dhm.obj"
+	if exist "build\$(CONFIG)\obj\havege.obj" del /Q "build\$(CONFIG)\obj\havege.obj"
+	if exist "build\$(CONFIG)\obj\md2.obj" del /Q "build\$(CONFIG)\obj\md2.obj"
+	if exist "build\$(CONFIG)\obj\md4.obj" del /Q "build\$(CONFIG)\obj\md4.obj"
+	if exist "build\$(CONFIG)\obj\md5.obj" del /Q "build\$(CONFIG)\obj\md5.obj"
+	if exist "build\$(CONFIG)\obj\net.obj" del /Q "build\$(CONFIG)\obj\net.obj"
+	if exist "build\$(CONFIG)\obj\padlock.obj" del /Q "build\$(CONFIG)\obj\padlock.obj"
+	if exist "build\$(CONFIG)\obj\rsa.obj" del /Q "build\$(CONFIG)\obj\rsa.obj"
+	if exist "build\$(CONFIG)\obj\sha1.obj" del /Q "build\$(CONFIG)\obj\sha1.obj"
+	if exist "build\$(CONFIG)\obj\sha2.obj" del /Q "build\$(CONFIG)\obj\sha2.obj"
+	if exist "build\$(CONFIG)\obj\sha4.obj" del /Q "build\$(CONFIG)\obj\sha4.obj"
+	if exist "build\$(CONFIG)\obj\ssl_cli.obj" del /Q "build\$(CONFIG)\obj\ssl_cli.obj"
+	if exist "build\$(CONFIG)\obj\ssl_srv.obj" del /Q "build\$(CONFIG)\obj\ssl_srv.obj"
+	if exist "build\$(CONFIG)\obj\ssl_tls.obj" del /Q "build\$(CONFIG)\obj\ssl_tls.obj"
+	if exist "build\$(CONFIG)\obj\timing.obj" del /Q "build\$(CONFIG)\obj\timing.obj"
+	if exist "build\$(CONFIG)\obj\x509parse.obj" del /Q "build\$(CONFIG)\obj\x509parse.obj"
+	if exist "build\$(CONFIG)\obj\xtea.obj" del /Q "build\$(CONFIG)\obj\xtea.obj"
+	if exist "build\$(CONFIG)\bin\libest.dll" del /Q "build\$(CONFIG)\bin\libest.dll"
+	if exist "build\$(CONFIG)\bin\libest.lib" del /Q "build\$(CONFIG)\bin\libest.lib"
+	if exist "build\$(CONFIG)\bin\libest.pdb" del /Q "build\$(CONFIG)\bin\libest.pdb"
+	if exist "build\$(CONFIG)\bin\libest.exp" del /Q "build\$(CONFIG)\bin\libest.exp"
+
+#
+#   me.h
+#
+
+build\$(CONFIG)\inc\me.h: $(DEPS_1)
+
+#
+#   osdep.h
+#
+DEPS_2 = $(DEPS_2) src\osdep\osdep.h
+DEPS_2 = $(DEPS_2) build\$(CONFIG)\inc\me.h
+
+build\$(CONFIG)\inc\osdep.h: $(DEPS_2)
+	@echo ..... [Copy] build\$(CONFIG)\inc\osdep.h
+	if not exist "build\$(CONFIG)\inc" md "build\$(CONFIG)\inc"
+	copy /Y /B src\osdep\osdep.h+modified build\$(CONFIG)\inc\osdep.h $(LOG)
+
+#
+#   aes.h
+#
+DEPS_3 = $(DEPS_3) src\aes.h
+
+build\$(CONFIG)\inc\aes.h: $(DEPS_3)
+	@echo ..... [Copy] build\$(CONFIG)\inc\aes.h
+	if not exist "build\$(CONFIG)\inc" md "build\$(CONFIG)\inc"
+	copy /Y /B src\aes.h+modified build\$(CONFIG)\inc\aes.h $(LOG)
+
+#
+#   arc4.h
+#
+DEPS_4 = $(DEPS_4) src\arc4.h
+
+build\$(CONFIG)\inc\arc4.h: $(DEPS_4)
+	@echo ..... [Copy] build\$(CONFIG)\inc\arc4.h
+	if not exist "build\$(CONFIG)\inc" md "build\$(CONFIG)\inc"
+	copy /Y /B src\arc4.h+modified build\$(CONFIG)\inc\arc4.h $(LOG)
+
+#
+#   base64.h
+#
+DEPS_5 = $(DEPS_5) src\base64.h
+
+build\$(CONFIG)\inc\base64.h: $(DEPS_5)
+	@echo ..... [Copy] build\$(CONFIG)\inc\base64.h
+	if not exist "build\$(CONFIG)\inc" md "build\$(CONFIG)\inc"
+	copy /Y /B src\base64.h+modified build\$(CONFIG)\inc\base64.h $(LOG)
+
+#
+#   bignum.h
+#
+DEPS_6 = $(DEPS_6) src\bignum.h
+
+build\$(CONFIG)\inc\bignum.h: $(DEPS_6)
+	@echo ..... [Copy] build\$(CONFIG)\inc\bignum.h
+	if not exist "build\$(CONFIG)\inc" md "build\$(CONFIG)\inc"
+	copy /Y /B src\bignum.h+modified build\$(CONFIG)\inc\bignum.h $(LOG)
+
+#
+#   bn_mul.h
+#
+DEPS_7 = $(DEPS_7) src\bn_mul.h
+
+build\$(CONFIG)\inc\bn_mul.h: $(DEPS_7)
+	@echo ..... [Copy] build\$(CONFIG)\inc\bn_mul.h
+	if not exist "build\$(CONFIG)\inc" md "build\$(CONFIG)\inc"
+	copy /Y /B src\bn_mul.h+modified build\$(CONFIG)\inc\bn_mul.h $(LOG)
+
+#
+#   camellia.h
+#
+DEPS_8 = $(DEPS_8) src\camellia.h
+
+build\$(CONFIG)\inc\camellia.h: $(DEPS_8)
+	@echo ..... [Copy] build\$(CONFIG)\inc\camellia.h
+	if not exist "build\$(CONFIG)\inc" md "build\$(CONFIG)\inc"
+	copy /Y /B src\camellia.h+modified build\$(CONFIG)\inc\camellia.h $(LOG)
+
+#
+#   certs.h
+#
+DEPS_9 = $(DEPS_9) src\certs.h
+
+build\$(CONFIG)\inc\certs.h: $(DEPS_9)
+	@echo ..... [Copy] build\$(CONFIG)\inc\certs.h
+	if not exist "build\$(CONFIG)\inc" md "build\$(CONFIG)\inc"
+	copy /Y /B src\certs.h+modified build\$(CONFIG)\inc\certs.h $(LOG)
+
+#
+#   debug.h
+#
+DEPS_10 = $(DEPS_10) src\debug.h
+
+build\$(CONFIG)\inc\debug.h: $(DEPS_10)
+	@echo ..... [Copy] build\$(CONFIG)\inc\debug.h
+	if not exist "build\$(CONFIG)\inc" md "build\$(CONFIG)\inc"
+	copy /Y /B src\debug.h+modified build\$(CONFIG)\inc\debug.h $(LOG)
+
+#
+#   des.h
+#
+DEPS_11 = $(DEPS_11) src\des.h
+
+build\$(CONFIG)\inc\des.h: $(DEPS_11)
+	@echo ..... [Copy] build\$(CONFIG)\inc\des.h
+	if not exist "build\$(CONFIG)\inc" md "build\$(CONFIG)\inc"
+	copy /Y /B src\des.h+modified build\$(CONFIG)\inc\des.h $(LOG)
+
+#
+#   dhm.h
+#
+DEPS_12 = $(DEPS_12) src\dhm.h
+
+build\$(CONFIG)\inc\dhm.h: $(DEPS_12)
+	@echo ..... [Copy] build\$(CONFIG)\inc\dhm.h
+	if not exist "build\$(CONFIG)\inc" md "build\$(CONFIG)\inc"
+	copy /Y /B src\dhm.h+modified build\$(CONFIG)\inc\dhm.h $(LOG)
+
+#
+#   net.h
+#
+DEPS_13 = $(DEPS_13) src\net.h
+
+build\$(CONFIG)\inc\net.h: $(DEPS_13)
+	@echo ..... [Copy] build\$(CONFIG)\inc\net.h
+	if not exist "build\$(CONFIG)\inc" md "build\$(CONFIG)\inc"
+	copy /Y /B src\net.h+modified build\$(CONFIG)\inc\net.h $(LOG)
+
+#
+#   rsa.h
+#
+DEPS_14 = $(DEPS_14) src\rsa.h
+
+build\$(CONFIG)\inc\rsa.h: $(DEPS_14)
+	@echo ..... [Copy] build\$(CONFIG)\inc\rsa.h
+	if not exist "build\$(CONFIG)\inc" md "build\$(CONFIG)\inc"
+	copy /Y /B src\rsa.h+modified build\$(CONFIG)\inc\rsa.h $(LOG)
+
+#
+#   md5.h
+#
+DEPS_15 = $(DEPS_15) src\md5.h
+
+build\$(CONFIG)\inc\md5.h: $(DEPS_15)
+	@echo ..... [Copy] build\$(CONFIG)\inc\md5.h
+	if not exist "build\$(CONFIG)\inc" md "build\$(CONFIG)\inc"
+	copy /Y /B src\md5.h+modified build\$(CONFIG)\inc\md5.h $(LOG)
+
+#
+#   sha1.h
+#
+DEPS_16 = $(DEPS_16) src\sha1.h
+
+build\$(CONFIG)\inc\sha1.h: $(DEPS_16)
+	@echo ..... [Copy] build\$(CONFIG)\inc\sha1.h
+	if not exist "build\$(CONFIG)\inc" md "build\$(CONFIG)\inc"
+	copy /Y /B src\sha1.h+modified build\$(CONFIG)\inc\sha1.h $(LOG)
+
+#
+#   x509.h
+#
+DEPS_17 = $(DEPS_17) src\x509.h
+
+build\$(CONFIG)\inc\x509.h: $(DEPS_17)
+	@echo ..... [Copy] build\$(CONFIG)\inc\x509.h
+	if not exist "build\$(CONFIG)\inc" md "build\$(CONFIG)\inc"
+	copy /Y /B src\x509.h+modified build\$(CONFIG)\inc\x509.h $(LOG)
+
+#
+#   ssl.h
+#
+DEPS_18 = $(DEPS_18) src\ssl.h
+
+build\$(CONFIG)\inc\ssl.h: $(DEPS_18)
+	@echo ..... [Copy] build\$(CONFIG)\inc\ssl.h
+	if not exist "build\$(CONFIG)\inc" md "build\$(CONFIG)\inc"
+	copy /Y /B src\ssl.h+modified build\$(CONFIG)\inc\ssl.h $(LOG)
+
+#
+#   havege.h
+#
+DEPS_19 = $(DEPS_19) src\havege.h
+
+build\$(CONFIG)\inc\havege.h: $(DEPS_19)
+	@echo ..... [Copy] build\$(CONFIG)\inc\havege.h
+	if not exist "build\$(CONFIG)\inc" md "build\$(CONFIG)\inc"
+	copy /Y /B src\havege.h+modified build\$(CONFIG)\inc\havege.h $(LOG)
+
+#
+#   md2.h
+#
+DEPS_20 = $(DEPS_20) src\md2.h
+
+build\$(CONFIG)\inc\md2.h: $(DEPS_20)
+	@echo ..... [Copy] build\$(CONFIG)\inc\md2.h
+	if not exist "build\$(CONFIG)\inc" md "build\$(CONFIG)\inc"
+	copy /Y /B src\md2.h+modified build\$(CONFIG)\inc\md2.h $(LOG)
+
+#
+#   md4.h
+#
+DEPS_21 = $(DEPS_21) src\md4.h
+
+build\$(CONFIG)\inc\md4.h: $(DEPS_21)
+	@echo ..... [Copy] build\$(CONFIG)\inc\md4.h
+	if not exist "build\$(CONFIG)\inc" md "build\$(CONFIG)\inc"
+	copy /Y /B src\md4.h+modified build\$(CONFIG)\inc\md4.h $(LOG)
+
+#
+#   padlock.h
+#
+DEPS_22 = $(DEPS_22) src\padlock.h
+
+build\$(CONFIG)\inc\padlock.h: $(DEPS_22)
+	@echo ..... [Copy] build\$(CONFIG)\inc\padlock.h
+	if not exist "build\$(CONFIG)\inc" md "build\$(CONFIG)\inc"
+	copy /Y /B src\padlock.h+modified build\$(CONFIG)\inc\padlock.h $(LOG)
+
+#
+#   sha2.h
+#
+DEPS_23 = $(DEPS_23) src\sha2.h
+
+build\$(CONFIG)\inc\sha2.h: $(DEPS_23)
+	@echo ..... [Copy] build\$(CONFIG)\inc\sha2.h
+	if not exist "build\$(CONFIG)\inc" md "build\$(CONFIG)\inc"
+	copy /Y /B src\sha2.h+modified build\$(CONFIG)\inc\sha2.h $(LOG)
+
+#
+#   sha4.h
+#
+DEPS_24 = $(DEPS_24) src\sha4.h
+
+build\$(CONFIG)\inc\sha4.h: $(DEPS_24)
+	@echo ..... [Copy] build\$(CONFIG)\inc\sha4.h
+	if not exist "build\$(CONFIG)\inc" md "build\$(CONFIG)\inc"
+	copy /Y /B src\sha4.h+modified build\$(CONFIG)\inc\sha4.h $(LOG)
+
+#
+#   timing.h
+#
+DEPS_25 = $(DEPS_25) src\timing.h
+
+build\$(CONFIG)\inc\timing.h: $(DEPS_25)
+	@echo ..... [Copy] build\$(CONFIG)\inc\timing.h
+	if not exist "build\$(CONFIG)\inc" md "build\$(CONFIG)\inc"
+	copy /Y /B src\timing.h+modified build\$(CONFIG)\inc\timing.h $(LOG)
+
+#
+#   xtea.h
+#
+DEPS_26 = $(DEPS_26) src\xtea.h
+
+build\$(CONFIG)\inc\xtea.h: $(DEPS_26)
+	@echo ..... [Copy] build\$(CONFIG)\inc\xtea.h
+	if not exist "build\$(CONFIG)\inc" md "build\$(CONFIG)\inc"
+	copy /Y /B src\xtea.h+modified build\$(CONFIG)\inc\xtea.h $(LOG)
+
+#
+#   est.h
+#
+DEPS_27 = $(DEPS_27) src\est.h
+DEPS_27 = $(DEPS_27) build\$(CONFIG)\inc\me.h
+DEPS_27 = $(DEPS_27) build\$(CONFIG)\inc\osdep.h
+DEPS_27 = $(DEPS_27) build\$(CONFIG)\inc\bignum.h
+DEPS_27 = $(DEPS_27) build\$(CONFIG)\inc\net.h
+DEPS_27 = $(DEPS_27) build\$(CONFIG)\inc\dhm.h
+DEPS_27 = $(DEPS_27) build\$(CONFIG)\inc\rsa.h
+DEPS_27 = $(DEPS_27) build\$(CONFIG)\inc\md5.h
+DEPS_27 = $(DEPS_27) build\$(CONFIG)\inc\sha1.h
+DEPS_27 = $(DEPS_27) build\$(CONFIG)\inc\x509.h
+DEPS_27 = $(DEPS_27) build\$(CONFIG)\inc\ssl.h
+DEPS_27 = $(DEPS_27) build\$(CONFIG)\inc\aes.h
+DEPS_27 = $(DEPS_27) build\$(CONFIG)\inc\arc4.h
+DEPS_27 = $(DEPS_27) build\$(CONFIG)\inc\base64.h
+DEPS_27 = $(DEPS_27) build\$(CONFIG)\inc\bn_mul.h
+DEPS_27 = $(DEPS_27) build\$(CONFIG)\inc\camellia.h
+DEPS_27 = $(DEPS_27) build\$(CONFIG)\inc\certs.h
+DEPS_27 = $(DEPS_27) build\$(CONFIG)\inc\debug.h
+DEPS_27 = $(DEPS_27) build\$(CONFIG)\inc\des.h
+DEPS_27 = $(DEPS_27) build\$(CONFIG)\inc\havege.h
+DEPS_27 = $(DEPS_27) build\$(CONFIG)\inc\md2.h
+DEPS_27 = $(DEPS_27) build\$(CONFIG)\inc\md4.h
+DEPS_27 = $(DEPS_27) build\$(CONFIG)\inc\padlock.h
+DEPS_27 = $(DEPS_27) build\$(CONFIG)\inc\sha2.h
+DEPS_27 = $(DEPS_27) build\$(CONFIG)\inc\sha4.h
+DEPS_27 = $(DEPS_27) build\$(CONFIG)\inc\timing.h
+DEPS_27 = $(DEPS_27) build\$(CONFIG)\inc\xtea.h
+
+build\$(CONFIG)\inc\est.h: $(DEPS_27)
+	@echo ..... [Copy] build\$(CONFIG)\inc\est.h
+	if not exist "build\$(CONFIG)\inc" md "build\$(CONFIG)\inc"
+	copy /Y /B src\est.h+modified build\$(CONFIG)\inc\est.h $(LOG)
+
+#
+#   openssl.h
+#
+DEPS_28 = $(DEPS_28) src\openssl.h
+
+build\$(CONFIG)\inc\openssl.h: $(DEPS_28)
+	@echo ..... [Copy] build\$(CONFIG)\inc\openssl.h
+	if not exist "build\$(CONFIG)\inc" md "build\$(CONFIG)\inc"
+	copy /Y /B src\openssl.h+modified build\$(CONFIG)\inc\openssl.h $(LOG)
+
+#
+#   aes.obj
+#
+DEPS_29 = $(DEPS_29) build\$(CONFIG)\inc\est.h
+
+build\$(CONFIG)\obj\aes.obj: \
+    src\aes.c $(DEPS_29)
+	@echo .. [Compile] build\$(CONFIG)\obj\aes.obj
+	"$(CC)" -c -Fo$(BUILD)\obj\aes.obj -Fd$(BUILD)\obj\aes.pdb -nologo -GR- -Zi -Od -MDd $(DFLAGS) $(IFLAGS) src\aes.c $(LOG)
+
+#
+#   arc4.obj
+#
+DEPS_30 = $(DEPS_30) build\$(CONFIG)\inc\est.h
+
+build\$(CONFIG)\obj\arc4.obj: \
+    src\arc4.c $(DEPS_30)
+	@echo .. [Compile] build\$(CONFIG)\obj\arc4.obj
+	"$(CC)" -c -Fo$(BUILD)\obj\arc4.obj -Fd$(BUILD)\obj\arc4.pdb -nologo -GR- -Zi -Od -MDd $(DFLAGS) $(IFLAGS) src\arc4.c $(LOG)
+
+#
+#   base64.obj
+#
+DEPS_31 = $(DEPS_31) build\$(CONFIG)\inc\est.h
+
+build\$(CONFIG)\obj\base64.obj: \
+    src\base64.c $(DEPS_31)
+	@echo .. [Compile] build\$(CONFIG)\obj\base64.obj
+	"$(CC)" -c -Fo$(BUILD)\obj\base64.obj -Fd$(BUILD)\obj\base64.pdb -nologo -GR- -Zi -Od -MDd $(DFLAGS) $(IFLAGS) src\base64.c $(LOG)
+
+#
+#   bignum.obj
+#
+DEPS_32 = $(DEPS_32) build\$(CONFIG)\inc\est.h
+
+build\$(CONFIG)\obj\bignum.obj: \
+    src\bignum.c $(DEPS_32)
+	@echo .. [Compile] build\$(CONFIG)\obj\bignum.obj
+	"$(CC)" -c -Fo$(BUILD)\obj\bignum.obj -Fd$(BUILD)\obj\bignum.pdb -nologo -GR- -Zi -Od -MDd $(DFLAGS) $(IFLAGS) src\bignum.c $(LOG)
+
+#
+#   camellia.obj
+#
+DEPS_33 = $(DEPS_33) build\$(CONFIG)\inc\est.h
+
+build\$(CONFIG)\obj\camellia.obj: \
+    src\camellia.c $(DEPS_33)
+	@echo .. [Compile] build\$(CONFIG)\obj\camellia.obj
+	"$(CC)" -c -Fo$(BUILD)\obj\camellia.obj -Fd$(BUILD)\obj\camellia.pdb -nologo -GR- -Zi -Od -MDd $(DFLAGS) $(IFLAGS) src\camellia.c $(LOG)
+
+#
+#   certs.obj
+#
+DEPS_34 = $(DEPS_34) build\$(CONFIG)\inc\est.h
+
+build\$(CONFIG)\obj\certs.obj: \
+    src\certs.c $(DEPS_34)
+	@echo .. [Compile] build\$(CONFIG)\obj\certs.obj
+	"$(CC)" -c -Fo$(BUILD)\obj\certs.obj -Fd$(BUILD)\obj\certs.pdb -nologo -GR- -Zi -Od -MDd $(DFLAGS) $(IFLAGS) src\certs.c $(LOG)
+
+#
+#   debug.obj
+#
+DEPS_35 = $(DEPS_35) build\$(CONFIG)\inc\est.h
+
+build\$(CONFIG)\obj\debug.obj: \
+    src\debug.c $(DEPS_35)
+	@echo .. [Compile] build\$(CONFIG)\obj\debug.obj
+	"$(CC)" -c -Fo$(BUILD)\obj\debug.obj -Fd$(BUILD)\obj\debug.pdb -nologo -GR- -Zi -Od -MDd $(DFLAGS) $(IFLAGS) src\debug.c $(LOG)
+
+#
+#   des.obj
+#
+DEPS_36 = $(DEPS_36) build\$(CONFIG)\inc\est.h
+
+build\$(CONFIG)\obj\des.obj: \
+    src\des.c $(DEPS_36)
+	@echo .. [Compile] build\$(CONFIG)\obj\des.obj
+	"$(CC)" -c -Fo$(BUILD)\obj\des.obj -Fd$(BUILD)\obj\des.pdb -nologo -GR- -Zi -Od -MDd $(DFLAGS) $(IFLAGS) src\des.c $(LOG)
+
+#
+#   dhm.obj
+#
+DEPS_37 = $(DEPS_37) build\$(CONFIG)\inc\est.h
+
+build\$(CONFIG)\obj\dhm.obj: \
+    src\dhm.c $(DEPS_37)
+	@echo .. [Compile] build\$(CONFIG)\obj\dhm.obj
+	"$(CC)" -c -Fo$(BUILD)\obj\dhm.obj -Fd$(BUILD)\obj\dhm.pdb -nologo -GR- -Zi -Od -MDd $(DFLAGS) $(IFLAGS) src\dhm.c $(LOG)
+
+#
+#   havege.obj
+#
+DEPS_38 = $(DEPS_38) build\$(CONFIG)\inc\est.h
+
+build\$(CONFIG)\obj\havege.obj: \
+    src\havege.c $(DEPS_38)
+	@echo .. [Compile] build\$(CONFIG)\obj\havege.obj
+	"$(CC)" -c -Fo$(BUILD)\obj\havege.obj -Fd$(BUILD)\obj\havege.pdb -nologo -GR- -Zi -Od -MDd $(DFLAGS) $(IFLAGS) src\havege.c $(LOG)
+
+#
+#   md2.obj
+#
+DEPS_39 = $(DEPS_39) build\$(CONFIG)\inc\est.h
+
+build\$(CONFIG)\obj\md2.obj: \
+    src\md2.c $(DEPS_39)
+	@echo .. [Compile] build\$(CONFIG)\obj\md2.obj
+	"$(CC)" -c -Fo$(BUILD)\obj\md2.obj -Fd$(BUILD)\obj\md2.pdb -nologo -GR- -Zi -Od -MDd $(DFLAGS) $(IFLAGS) src\md2.c $(LOG)
+
+#
+#   md4.obj
+#
+DEPS_40 = $(DEPS_40) build\$(CONFIG)\inc\est.h
+
+build\$(CONFIG)\obj\md4.obj: \
+    src\md4.c $(DEPS_40)
+	@echo .. [Compile] build\$(CONFIG)\obj\md4.obj
+	"$(CC)" -c -Fo$(BUILD)\obj\md4.obj -Fd$(BUILD)\obj\md4.pdb -nologo -GR- -Zi -Od -MDd $(DFLAGS) $(IFLAGS) src\md4.c $(LOG)
+
+#
+#   md5.obj
+#
+DEPS_41 = $(DEPS_41) build\$(CONFIG)\inc\est.h
+
+build\$(CONFIG)\obj\md5.obj: \
+    src\md5.c $(DEPS_41)
+	@echo .. [Compile] build\$(CONFIG)\obj\md5.obj
+	"$(CC)" -c -Fo$(BUILD)\obj\md5.obj -Fd$(BUILD)\obj\md5.pdb -nologo -GR- -Zi -Od -MDd $(DFLAGS) $(IFLAGS) src\md5.c $(LOG)
+
+#
+#   net.obj
+#
+DEPS_42 = $(DEPS_42) build\$(CONFIG)\inc\est.h
+
+build\$(CONFIG)\obj\net.obj: \
+    src\net.c $(DEPS_42)
+	@echo .. [Compile] build\$(CONFIG)\obj\net.obj
+	"$(CC)" -c -Fo$(BUILD)\obj\net.obj -Fd$(BUILD)\obj\net.pdb -nologo -GR- -Zi -Od -MDd $(DFLAGS) $(IFLAGS) src\net.c $(LOG)
+
+#
+#   padlock.obj
+#
+DEPS_43 = $(DEPS_43) build\$(CONFIG)\inc\est.h
+
+build\$(CONFIG)\obj\padlock.obj: \
+    src\padlock.c $(DEPS_43)
+	@echo .. [Compile] build\$(CONFIG)\obj\padlock.obj
+	"$(CC)" -c -Fo$(BUILD)\obj\padlock.obj -Fd$(BUILD)\obj\padlock.pdb -nologo -GR- -Zi -Od -MDd $(DFLAGS) $(IFLAGS) src\padlock.c $(LOG)
+
+#
+#   rsa.obj
+#
+DEPS_44 = $(DEPS_44) build\$(CONFIG)\inc\est.h
+
+build\$(CONFIG)\obj\rsa.obj: \
+    src\rsa.c $(DEPS_44)
+	@echo .. [Compile] build\$(CONFIG)\obj\rsa.obj
+	"$(CC)" -c -Fo$(BUILD)\obj\rsa.obj -Fd$(BUILD)\obj\rsa.pdb -nologo -GR- -Zi -Od -MDd $(DFLAGS) $(IFLAGS) src\rsa.c $(LOG)
+
+#
+#   sha1.obj
+#
+DEPS_45 = $(DEPS_45) build\$(CONFIG)\inc\est.h
+
+build\$(CONFIG)\obj\sha1.obj: \
+    src\sha1.c $(DEPS_45)
+	@echo .. [Compile] build\$(CONFIG)\obj\sha1.obj
+	"$(CC)" -c -Fo$(BUILD)\obj\sha1.obj -Fd$(BUILD)\obj\sha1.pdb -nologo -GR- -Zi -Od -MDd $(DFLAGS) $(IFLAGS) src\sha1.c $(LOG)
+
+#
+#   sha2.obj
+#
+DEPS_46 = $(DEPS_46) build\$(CONFIG)\inc\est.h
+
+build\$(CONFIG)\obj\sha2.obj: \
+    src\sha2.c $(DEPS_46)
+	@echo .. [Compile] build\$(CONFIG)\obj\sha2.obj
+	"$(CC)" -c -Fo$(BUILD)\obj\sha2.obj -Fd$(BUILD)\obj\sha2.pdb -nologo -GR- -Zi -Od -MDd $(DFLAGS) $(IFLAGS) src\sha2.c $(LOG)
+
+#
+#   sha4.obj
+#
+DEPS_47 = $(DEPS_47) build\$(CONFIG)\inc\est.h
+
+build\$(CONFIG)\obj\sha4.obj: \
+    src\sha4.c $(DEPS_47)
+	@echo .. [Compile] build\$(CONFIG)\obj\sha4.obj
+	"$(CC)" -c -Fo$(BUILD)\obj\sha4.obj -Fd$(BUILD)\obj\sha4.pdb -nologo -GR- -Zi -Od -MDd $(DFLAGS) $(IFLAGS) src\sha4.c $(LOG)
+
+#
+#   ssl_cli.obj
+#
+DEPS_48 = $(DEPS_48) build\$(CONFIG)\inc\est.h
+
+build\$(CONFIG)\obj\ssl_cli.obj: \
+    src\ssl_cli.c $(DEPS_48)
+	@echo .. [Compile] build\$(CONFIG)\obj\ssl_cli.obj
+	"$(CC)" -c -Fo$(BUILD)\obj\ssl_cli.obj -Fd$(BUILD)\obj\ssl_cli.pdb -nologo -GR- -Zi -Od -MDd $(DFLAGS) $(IFLAGS) src\ssl_cli.c $(LOG)
+
+#
+#   ssl_srv.obj
+#
+DEPS_49 = $(DEPS_49) build\$(CONFIG)\inc\est.h
+
+build\$(CONFIG)\obj\ssl_srv.obj: \
+    src\ssl_srv.c $(DEPS_49)
+	@echo .. [Compile] build\$(CONFIG)\obj\ssl_srv.obj
+	"$(CC)" -c -Fo$(BUILD)\obj\ssl_srv.obj -Fd$(BUILD)\obj\ssl_srv.pdb -nologo -GR- -Zi -Od -MDd $(DFLAGS) $(IFLAGS) src\ssl_srv.c $(LOG)
+
+#
+#   ssl_tls.obj
+#
+DEPS_50 = $(DEPS_50) build\$(CONFIG)\inc\est.h
+
+build\$(CONFIG)\obj\ssl_tls.obj: \
+    src\ssl_tls.c $(DEPS_50)
+	@echo .. [Compile] build\$(CONFIG)\obj\ssl_tls.obj
+	"$(CC)" -c -Fo$(BUILD)\obj\ssl_tls.obj -Fd$(BUILD)\obj\ssl_tls.pdb -nologo -GR- -Zi -Od -MDd $(DFLAGS) $(IFLAGS) src\ssl_tls.c $(LOG)
+
+#
+#   timing.obj
+#
+DEPS_51 = $(DEPS_51) build\$(CONFIG)\inc\est.h
+
+build\$(CONFIG)\obj\timing.obj: \
+    src\timing.c $(DEPS_51)
+	@echo .. [Compile] build\$(CONFIG)\obj\timing.obj
+	"$(CC)" -c -Fo$(BUILD)\obj\timing.obj -Fd$(BUILD)\obj\timing.pdb -nologo -GR- -Zi -Od -MDd $(DFLAGS) $(IFLAGS) src\timing.c $(LOG)
+
+#
+#   x509parse.obj
+#
+DEPS_52 = $(DEPS_52) build\$(CONFIG)\inc\est.h
+
+build\$(CONFIG)\obj\x509parse.obj: \
+    src\x509parse.c $(DEPS_52)
+	@echo .. [Compile] build\$(CONFIG)\obj\x509parse.obj
+	"$(CC)" -c -Fo$(BUILD)\obj\x509parse.obj -Fd$(BUILD)\obj\x509parse.pdb -nologo -GR- -Zi -Od -MDd $(DFLAGS) $(IFLAGS) src\x509parse.c $(LOG)
+
+#
+#   xtea.obj
+#
+DEPS_53 = $(DEPS_53) build\$(CONFIG)\inc\est.h
+
+build\$(CONFIG)\obj\xtea.obj: \
+    src\xtea.c $(DEPS_53)
+	@echo .. [Compile] build\$(CONFIG)\obj\xtea.obj
+	"$(CC)" -c -Fo$(BUILD)\obj\xtea.obj -Fd$(BUILD)\obj\xtea.pdb -nologo -GR- -Zi -Od -MDd $(DFLAGS) $(IFLAGS) src\xtea.c $(LOG)
+
+!IF "$(ME_COM_EST)" == "1"
+#
+#   libest
+#
+DEPS_54 = $(DEPS_54) build\$(CONFIG)\inc\osdep.h
+DEPS_54 = $(DEPS_54) build\$(CONFIG)\inc\aes.h
+DEPS_54 = $(DEPS_54) build\$(CONFIG)\inc\arc4.h
+DEPS_54 = $(DEPS_54) build\$(CONFIG)\inc\base64.h
+DEPS_54 = $(DEPS_54) build\$(CONFIG)\inc\bignum.h
+DEPS_54 = $(DEPS_54) build\$(CONFIG)\inc\bn_mul.h
+DEPS_54 = $(DEPS_54) build\$(CONFIG)\inc\camellia.h
+DEPS_54 = $(DEPS_54) build\$(CONFIG)\inc\certs.h
+DEPS_54 = $(DEPS_54) build\$(CONFIG)\inc\debug.h
+DEPS_54 = $(DEPS_54) build\$(CONFIG)\inc\des.h
+DEPS_54 = $(DEPS_54) build\$(CONFIG)\inc\dhm.h
+DEPS_54 = $(DEPS_54) build\$(CONFIG)\inc\est.h
+DEPS_54 = $(DEPS_54) build\$(CONFIG)\inc\havege.h
+DEPS_54 = $(DEPS_54) build\$(CONFIG)\inc\md2.h
+DEPS_54 = $(DEPS_54) build\$(CONFIG)\inc\md4.h
+DEPS_54 = $(DEPS_54) build\$(CONFIG)\inc\md5.h
+DEPS_54 = $(DEPS_54) build\$(CONFIG)\inc\net.h
+DEPS_54 = $(DEPS_54) build\$(CONFIG)\inc\openssl.h
+DEPS_54 = $(DEPS_54) build\$(CONFIG)\inc\padlock.h
+DEPS_54 = $(DEPS_54) build\$(CONFIG)\inc\rsa.h
+DEPS_54 = $(DEPS_54) build\$(CONFIG)\inc\sha1.h
+DEPS_54 = $(DEPS_54) build\$(CONFIG)\inc\sha2.h
+DEPS_54 = $(DEPS_54) build\$(CONFIG)\inc\sha4.h
+DEPS_54 = $(DEPS_54) build\$(CONFIG)\inc\ssl.h
+DEPS_54 = $(DEPS_54) build\$(CONFIG)\inc\timing.h
+DEPS_54 = $(DEPS_54) build\$(CONFIG)\inc\x509.h
+DEPS_54 = $(DEPS_54) build\$(CONFIG)\inc\xtea.h
+DEPS_54 = $(DEPS_54) build\$(CONFIG)\obj\aes.obj
+DEPS_54 = $(DEPS_54) build\$(CONFIG)\obj\arc4.obj
+DEPS_54 = $(DEPS_54) build\$(CONFIG)\obj\base64.obj
+DEPS_54 = $(DEPS_54) build\$(CONFIG)\obj\bignum.obj
+DEPS_54 = $(DEPS_54) build\$(CONFIG)\obj\camellia.obj
+DEPS_54 = $(DEPS_54) build\$(CONFIG)\obj\certs.obj
+DEPS_54 = $(DEPS_54) build\$(CONFIG)\obj\debug.obj
+DEPS_54 = $(DEPS_54) build\$(CONFIG)\obj\des.obj
+DEPS_54 = $(DEPS_54) build\$(CONFIG)\obj\dhm.obj
+DEPS_54 = $(DEPS_54) build\$(CONFIG)\obj\havege.obj
+DEPS_54 = $(DEPS_54) build\$(CONFIG)\obj\md2.obj
+DEPS_54 = $(DEPS_54) build\$(CONFIG)\obj\md4.obj
+DEPS_54 = $(DEPS_54) build\$(CONFIG)\obj\md5.obj
+DEPS_54 = $(DEPS_54) build\$(CONFIG)\obj\net.obj
+DEPS_54 = $(DEPS_54) build\$(CONFIG)\obj\padlock.obj
+DEPS_54 = $(DEPS_54) build\$(CONFIG)\obj\rsa.obj
+DEPS_54 = $(DEPS_54) build\$(CONFIG)\obj\sha1.obj
+DEPS_54 = $(DEPS_54) build\$(CONFIG)\obj\sha2.obj
+DEPS_54 = $(DEPS_54) build\$(CONFIG)\obj\sha4.obj
+DEPS_54 = $(DEPS_54) build\$(CONFIG)\obj\ssl_cli.obj
+DEPS_54 = $(DEPS_54) build\$(CONFIG)\obj\ssl_srv.obj
+DEPS_54 = $(DEPS_54) build\$(CONFIG)\obj\ssl_tls.obj
+DEPS_54 = $(DEPS_54) build\$(CONFIG)\obj\timing.obj
+DEPS_54 = $(DEPS_54) build\$(CONFIG)\obj\x509parse.obj
+DEPS_54 = $(DEPS_54) build\$(CONFIG)\obj\xtea.obj
+
+build\$(CONFIG)\bin\libest.dll: $(DEPS_54)
+	@echo ..... [Link] build\$(CONFIG)\bin\libest.dll
+	"$(LD)" -dll -out:$(BUILD)\bin\libest.dll -entry:$(ENTRY) $(LDFLAGS) $(LIBPATHS) "$(BUILD)\obj\aes.obj" "$(BUILD)\obj\arc4.obj" "$(BUILD)\obj\base64.obj" "$(BUILD)\obj\bignum.obj" "$(BUILD)\obj\camellia.obj" "$(BUILD)\obj\certs.obj" "$(BUILD)\obj\debug.obj" "$(BUILD)\obj\des.obj" "$(BUILD)\obj\dhm.obj" "$(BUILD)\obj\havege.obj" "$(BUILD)\obj\md2.obj" "$(BUILD)\obj\md4.obj" "$(BUILD)\obj\md5.obj" "$(BUILD)\obj\net.obj" "$(BUILD)\obj\padlock.obj" "$(BUILD)\obj\rsa.obj" "$(BUILD)\obj\sha1.obj" "$(BUILD)\obj\sha2.obj" "$(BUILD)\obj\sha4.obj" "$(BUILD)\obj\ssl_cli.obj" "$(BUILD)\obj\ssl_srv.obj" "$(BUILD)\obj\ssl_tls.obj" "$(BUILD)\obj\timing.obj" "$(BUILD)\obj\x509parse.obj" "$(BUILD)\obj\xtea.obj" $(LIBS)  $(LOG)
+!ENDIF
+

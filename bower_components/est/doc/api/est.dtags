@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
+<tagfile>
+  <compound kind="file">
+    <name>est.h</name>
+    <path>/Users/mob/git/est/src/</path>
+    <filename>est_8h</filename>
+  </compound>
+  <compound kind="dir">
+    <name>src</name>
+    <path>/Users/mob/git/est/src/</path>
+    <filename>dir_68267d1309a1af8e8297ef4c3efbcdba.html</filename>
+    <file>est.h</file>
+  </compound>
+</tagfile>

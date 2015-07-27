@@ -1,0 +1,22 @@
+/*
+    doc.bit -- EST documentation build file
+ */
+
+Me.load({
+
+    targets: {
+        api: {
+            enable: false,
+            action: `
+                apidoc('api/est.dox', '${SRC}/src/est.h', 'EST API', 'api/*.tags')
+            `,
+        }, 
+
+        'clean-doc': {
+            type: 'clean',
+            action: `
+                rmdir(['../doc/api/html', '../doc/api/xml'])
+            `
+        },
+    },
+})
